@@ -7,32 +7,66 @@ $(".results").hide();
  
 console.log('App loaded! Waiting for submit!');
 
-});
-
 $("#start").click(function(){
-    $(".welcome").hide(); 
-    $(".search").show();  
-    console.log("start clicked"); 
+  $(".welcome").hide(); 
+  $(".search").show();  
+  console.log("start clicked"); 
 })
 
 $("#go-search").click(function(){
-  $(".welcome").hide(); 
-  $(".search").hide();
-  $(".results").show(); 
-  watchForm();
-  console.log("go button clicked"); 
+$(".welcome").hide(); 
+$(".search").hide();
+$(".results").show(); 
+// watchForm();
+console.log("go button clicked"); 
 })
 
 $("#restart-button").click(function(event) {
-    $(".welcome").hide(); 
-    $(".search").show(); 
-    $(".results").hide();
-    console.log("re-started"); 
-  })
+  $(".welcome").hide(); 
+  $(".search").show(); 
+  $(".results").hide();
+  $(".dog-selector").prop("selectedIndex", 0);
+  console.log("re-started"); 
+  
+})
+
+
+$("#dog-form").submit(event => {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  let dogBreed = $(".dog-selector").val();
+  getImage(dogBreed);
+  console.log("input sent");
+  });
+  return false;
+
+});
+
+// $("#start").click(function(){
+//     $(".welcome").hide(); 
+//     $(".search").show();  
+//     console.log("start clicked"); 
+// })
+
+// $("#go-search").click(function(){
+//   $(".welcome").hide(); 
+//   $(".search").hide();
+//   $(".results").show(); 
+//   // watchForm();
+//   console.log("go button clicked"); 
+// })
+
+// $("#restart-button").click(function(event) {
+//     $(".welcome").hide(); 
+//     $(".search").show(); 
+//     $(".results").hide();
+//     console.log("re-started"); 
+//   })
 
 
 
   function getImage(dogBreed) {
+  console.log("fetch image"); 
   fetch(`https://dog.ceo/api/breed/${dogBreed}/images/random`)
   .then(response => {
   if (response.ok) {
@@ -59,12 +93,12 @@ function generateImage(responseJson) {
   
 
 
-function watchForm(event) {
-  $("#dog-form").submit(event => {
-  event.preventDefault();
-  let dogBreed = $(".dog-selector").val();
-  getImage(dogBreed);
-  console.log("input sent");
-  });
-}
+// function watchForm(event) {
+  // $("#dog-form").submit(event => {
+  // event.preventDefault();
+  // let dogBreed = $(".dog-selector").val();
+  // getImage(dogBreed);
+  // console.log("input sent");
+  // });
+// }
 
